@@ -1,0 +1,15 @@
+function [XE,swapTimes] = GEPP(X,b=NaN)
+%GEPP gauss elimination partial pivoting
+%   given matrix X and vector b, conbine X|b to a new matrix 
+%   then process gauss elimination with partial pivoting
+%   return the eliminated matrix and swap times
+% Inputes:
+%   X:  N * N matrix
+%   b:  N * 1 vector, b can be null
+% Outputs:
+%   XE: N * (N + 1) matrix or N * N matrix if b is not given
+
+outputArg1 = inputArg1;
+outputArg2 = inputArg2;
+end
+
