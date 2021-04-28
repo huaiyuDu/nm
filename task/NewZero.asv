@@ -1,0 +1,42 @@
+function [z,k] = NewZero(f,pf,x0,tol)
+%NEWZERO Newton's method to approximating the zero point 
+%   approximating the zero point of the function f with derivative pf by Newton's method (tangents) with start-point x0. The calculations (iterations) should be performed until a) the modulus of the difference of two successive approximation is already less than tol, or b) when the number of iterations exceeds 1000, or c) when the distance of the current approximation from the starting point exceeds 109.
+%Input:
+%   f : function
+%   pf: derivative fucntion of f
+%   x0: initial point
+%   tol: tolerance, default 1e-15
+
+% max iteration is 1000
+x = x0;
+for c = 1:1000
+    %xk+1 = xk −f(xk)/f′(xk)
+    x_new = x - f(x)/pf(x);
+    % fprintf("x=%f \n",x_new);
+    % may devide by 0 or choose an ilegal x so that f(x) or  
+    if isnan(x_new) | isinf(x_new)
+        fprintf('can not continue calculation\n');
+        break;
+    end;
+    epsilon = modulus(x_new, x);
+    if epsilon < tol
+        z = x_new;
+        k = c;
+        return
+    end;
+    if abs(x - x0) > 109
+        fprintf('too far away from initial guess\n');
+        break;
+    end;
+    x = x_new;
+end
+fprintf('not find root in limited iteration\n');
+z =NaN;
+k=NaN;
+end
+%modulus calculate modulus of the difference of two successive approximation
+%  res = |x'-x|/|x|
+function res=modulus(x_prime, x)
+    res = abs(x_prime - x)/abs(x);
+end
+
